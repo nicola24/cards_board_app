@@ -21,6 +21,10 @@ $ nodemon server/server.js
  - Once the server is running, you can visit `http://localhost:3000/`
 
 ## Composition
+- Node/ Express
+- MongoDB/ Mongoose
 - React
-- Webpack & Babel
 - Material-UI
+- Webpack & Babel
+
+![diagram](https://i.imgur.com/ThYqpGk.png)
