@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/board');
+mongoose.connect('mongodb://localhost/board', { useNewUrlParser: true });
 
 const CardSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: String,
+  title: String,
+  description: { type: String, required: true },
   color: { type: String, enum: ['green', 'yellow', 'blue', 'orange', 'pink'], required: true },
   time: { type: Date, default: Date.now },
 });
