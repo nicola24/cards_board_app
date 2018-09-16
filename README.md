@@ -24,7 +24,7 @@ $ nodemon server/server.js
 - Node/ Express
 - MongoDB/ Mongoose
 - React
-- Material-UI
+- Material-UI/ Bootstrap
 - Webpack & Babel
 
 ![diagram](https://i.imgur.com/ThYqpGk.png)

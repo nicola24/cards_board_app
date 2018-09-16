@@ -14,7 +14,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 const styles = {
-  button: {
+  submitButton: {
     paddingTop: 20,
     textAlign: 'center',
   },
@@ -54,10 +54,12 @@ const AddCard = ({
             label="Title"
             onChange={onChangeTitle}
           />
-          <TextField
-            label="Description"
+          <p className="text-secondary mt-4">Description</p>
+          <textarea
             required
             onChange={onChangeDescription}
+            className="form-control"
+            rows="5"
           />
           <Grid
             container
@@ -82,7 +84,7 @@ const AddCard = ({
               <Button variant="fab" mini style={styles.button5} onClick={onChangeColor} value="blue">{stateCardColor === 'blue' ? '✗' : ' '}</Button>
             </Grid>
           </Grid>
-          <div style={styles.button}>
+          <div style={styles.submitButton}>
             <Button variant="contained" type="submit">
               Create Card
             </Button>
