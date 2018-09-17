@@ -49,13 +49,12 @@ const SingleMemo = ({
           <Grid item>
             <IconButton onClick={onDialog}>
               <EditIcon />
-              <Dialog
-                open={stateDialog}
-                onClose={onDialog}
-              >
-                <UpdateMemo />
-              </Dialog>
             </IconButton>
+            <Dialog
+              open={stateDialog}
+            >
+              <UpdateMemo />
+            </Dialog>
           </Grid>
           <Grid item>
             <IconButton onClick={() => onDelete(card._id)}>
