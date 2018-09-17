@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -50,16 +49,18 @@ const AddCard = ({
     <CardContent>
       <form onSubmit={onCreateCard}>
         <FormControl>
-          <TextField
-            label="Title"
+          <input
             onChange={onChangeTitle}
+            maxLength="15"
+            className="form-control"
+            placeholder="Enter Title"
           />
-          <p className="text-secondary mt-4">Description</p>
           <textarea
             required
             onChange={onChangeDescription}
-            className="form-control"
+            className="form-control mt-2"
             rows="5"
+            placeholder="Enter Description *"
           />
           <Grid
             container
@@ -86,7 +87,7 @@ const AddCard = ({
           </Grid>
           <div style={styles.submitButton}>
             <Button variant="contained" type="submit">
-              Create Card
+              Create Memo
             </Button>
           </div>
         </FormControl>

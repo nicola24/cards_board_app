@@ -117,7 +117,7 @@ class Dashboard extends Component {
               <EditIcon />
             </IconButton>
             <Typography variant="title" color="inherit">
-              Cards Board App
+              Memo Board App
             </Typography>
           </Toolbar>
         </AppBar>

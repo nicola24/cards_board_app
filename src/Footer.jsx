@@ -10,7 +10,7 @@ const styles = {
 
 const Footer = () => (
   <Typography variant="caption" style={styles.text}>
-    Cards Board App by Nicolas Peyrichou, Copyright © 2018
+    Memo Board App by Nicolas Peyrichou, Copyright © 2018
   </Typography>
 );
 

@@ -19,8 +19,8 @@ import EditIcon from '@material-ui/icons/Edit';
 const SingleCard = ({ card, onDelete }) => {
   const styles = () => {
     const style = {
-      width: 300,
-      height: 300,
+      width: 250,
+      height: 250,
       backgroundColor: yellow[500],
     };
 
@@ -35,12 +35,23 @@ const SingleCard = ({ card, onDelete }) => {
   return (
     <Grid item>
       <Card style={styles()}>
-        <IconButton onClick={() => onDelete(card._id)}>
-          <DeleteIcon />
-        </IconButton>
-        <IconButton>
-          <EditIcon />
-        </IconButton>
+        <Grid
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="baseline"
+        >
+          <Grid item>
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton onClick={() => onDelete(card._id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
         <CardContent>
           <Typography variant="headline" component="h2">
             {card.title}
