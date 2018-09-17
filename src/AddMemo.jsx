@@ -43,7 +43,7 @@ const styles = {
 };
 
 const AddMemo = ({
-  onCreateMemo, onChangeTitle, onChangeDescription, onChangeColor, stateCardColor,
+  onCreateMemo, onChangeTitle, onChangeDescription, onChangeColor, stateMemoColor,
 }) => (
   <Card style={styles.card}>
     <CardContent>
@@ -70,19 +70,19 @@ const AddMemo = ({
             style={styles.grid}
           >
             <Grid item>
-              <Button variant="fab" mini style={styles.button1} onClick={onChangeColor} value="yellow">{stateCardColor === 'yellow' ? '✗' : ' '}</Button>
+              <Button variant="fab" mini style={styles.button1} onClick={onChangeColor} value="yellow">{stateMemoColor === 'yellow' ? '✗' : ' '}</Button>
             </Grid>
             <Grid item>
-              <Button variant="fab" mini style={styles.button2} onClick={onChangeColor} value="orange">{stateCardColor === 'orange' ? '✗' : ' '}</Button>
+              <Button variant="fab" mini style={styles.button2} onClick={onChangeColor} value="orange">{stateMemoColor === 'orange' ? '✗' : ' '}</Button>
             </Grid>
             <Grid item>
-              <Button variant="fab" mini style={styles.button3} onClick={onChangeColor} value="pink">{stateCardColor === 'pink' ? '✗' : ' '}</Button>
+              <Button variant="fab" mini style={styles.button3} onClick={onChangeColor} value="pink">{stateMemoColor === 'pink' ? '✗' : ' '}</Button>
             </Grid>
             <Grid item>
-              <Button variant="fab" mini style={styles.button4} onClick={onChangeColor} value="green">{stateCardColor === 'green' ? '✗' : ' '}</Button>
+              <Button variant="fab" mini style={styles.button4} onClick={onChangeColor} value="green">{stateMemoColor === 'green' ? '✗' : ' '}</Button>
             </Grid>
             <Grid item>
-              <Button variant="fab" mini style={styles.button5} onClick={onChangeColor} value="blue">{stateCardColor === 'blue' ? '✗' : ' '}</Button>
+              <Button variant="fab" mini style={styles.button5} onClick={onChangeColor} value="blue">{stateMemoColor === 'blue' ? '✗' : ' '}</Button>
             </Grid>
           </Grid>
           <div style={styles.submitButton}>
@@ -101,7 +101,7 @@ AddMemo.propTypes = {
   onChangeTitle: PropTypes.func.isRequired,
   onChangeDescription: PropTypes.func.isRequired,
   onChangeColor: PropTypes.func.isRequired,
-  stateCardColor: PropTypes.string.isRequired,
+  stateMemoColor: PropTypes.string.isRequired,
 };
 
 export default AddMemo;

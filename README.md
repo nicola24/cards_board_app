@@ -27,4 +27,4 @@ $ nodemon server/server.js
 - Material-UI/ Bootstrap
 - Webpack & Babel
 
-![diagram](https://i.imgur.com/ThYqpGk.png)
+![diagram](https://i.imgur.com/rjZUy4g.png)

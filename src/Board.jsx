@@ -14,7 +14,7 @@ const styles = {
 };
 
 const Board = ({
-  cards, onDelete, stateDialog, onDialog,
+  memos, onDelete, stateDialog, onDialog,
 }) => (
   <div style={styles.root}>
     <Grid
@@ -24,7 +24,7 @@ const Board = ({
       alignItems="center"
       spacing={24}
     >
-      {cards.map(x => (
+      {memos.map(x => (
         <SingleMemo
           key={x._id}
           card={x}
@@ -38,7 +38,7 @@ const Board = ({
 );
 
 Board.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  memos: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDelete: PropTypes.func.isRequired,
   stateDialog: PropTypes.bool.isRequired,
   onDialog: PropTypes.func.isRequired,

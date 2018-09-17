@@ -30,10 +30,10 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       expanded: false,
-      cards: [],
+      memos: [],
       stateTitle: '',
       stateDescription: '',
-      stateCardColor: 'yellow',
+      stateMemoColor: 'yellow',
       stateDialog: false,
     };
     this.toggle = this.toggle.bind(this);
@@ -46,13 +46,13 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.fetchCards();
+    this.fetchMemos();
   }
 
-  fetchCards() {
-    fetch('/getcards')
+  fetchMemos() {
+    fetch('/getmemos')
       .then(res => res.json())
-      .then(data => this.setState({ cards: data }));
+      .then(data => this.setState({ memos: data }));
   }
 
   toggle() {
@@ -72,24 +72,24 @@ class Dashboard extends Component {
   }
 
   handleColor(e) {
-    this.setState({ stateCardColor: e.target.value });
+    this.setState({ stateMemoColor: e.target.value });
   }
 
   handleDelete(id) {
-    fetch('/deletecard', {
+    fetch('/deletememo', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
     });
-    this.fetchCards();
+    this.fetchMemos();
   }
 
   handleCreateMemo(e) {
-    const { stateTitle, stateDescription, stateCardColor } = this.state;
+    const { stateTitle, stateDescription, stateMemoColor } = this.state;
 
-    fetch('/createcard', {
+    fetch('/creatememo', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -97,18 +97,18 @@ class Dashboard extends Component {
       body: JSON.stringify({
         title: stateTitle,
         description: stateDescription,
-        color: stateCardColor,
+        color: stateMemoColor,
       }),
     });
 
     this.setState({ expanded: false });
-    this.fetchCards();
+    this.fetchMemos();
     e.preventDefault();
   }
 
   render() {
     const {
-      expanded, cards, stateCardColor, stateDialog,
+      expanded, memos, stateMemoColor, stateDialog,
     } = this.state;
     return (
       <div style={styles.root}>
@@ -136,7 +136,7 @@ class Dashboard extends Component {
                   onChangeDescription={this.handleDescription}
                   onCreateMemo={this.handleCreateMemo}
                   onChangeColor={this.handleColor}
-                  stateCardColor={stateCardColor}
+                  stateMemoColor={stateMemoColor}
                 />
               </Grid>
               <Grid item>
@@ -146,7 +146,7 @@ class Dashboard extends Component {
           </div>
         </Drawer>
         <Board
-          cards={cards}
+          memos={memos}
           stateDialog={stateDialog}
           onDelete={this.handleDelete}
           onDialog={this.handleDialog}
