@@ -15,8 +15,13 @@ import blue from '@material-ui/core/colors/blue';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import Dialog from '@material-ui/core/Dialog';
 
-const SingleCard = ({ card, onDelete }) => {
+import UpdateMemo from './UpdateMemo';
+
+const SingleMemo = ({
+  card, onDelete, stateDialog, onDialog,
+}) => {
   const styles = () => {
     const style = {
       width: 250,
@@ -42,8 +47,14 @@ const SingleCard = ({ card, onDelete }) => {
           alignItems="baseline"
         >
           <Grid item>
-            <IconButton>
+            <IconButton onClick={onDialog}>
               <EditIcon />
+              <Dialog
+                open={stateDialog}
+                onClose={onDialog}
+              >
+                <UpdateMemo />
+              </Dialog>
             </IconButton>
           </Grid>
           <Grid item>
@@ -68,7 +79,7 @@ const SingleCard = ({ card, onDelete }) => {
   );
 };
 
-SingleCard.propTypes = {
+SingleMemo.propTypes = {
   onDelete: PropTypes.func.isRequired,
   card: PropTypes.shape({
     title: PropTypes.string,
@@ -76,6 +87,8 @@ SingleCard.propTypes = {
     _id: PropTypes.string,
     description: PropTypes.string,
   }).isRequired,
+  stateDialog: PropTypes.bool.isRequired,
+  onDialog: PropTypes.func.isRequired,
 };
 
-export default SingleCard;
+export default SingleMemo;

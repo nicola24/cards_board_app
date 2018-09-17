@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Footer from './Footer';
 import Board from './Board';
-import AddCard from './AddCard';
+import AddMemo from './AddMemo';
 
 const styles = {
   root: {
@@ -34,13 +34,15 @@ class Dashboard extends Component {
       stateTitle: '',
       stateDescription: '',
       stateCardColor: 'yellow',
+      stateDialog: false,
     };
     this.toggle = this.toggle.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
-    this.handleCreateCard = this.handleCreateCard.bind(this);
+    this.handleCreateMemo = this.handleCreateMemo.bind(this);
     this.handleColor = this.handleColor.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleDialog = this.handleDialog.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,10 @@ class Dashboard extends Component {
 
   toggle() {
     this.setState(state => ({ expanded: !state.expanded }));
+  }
+
+  handleDialog() {
+    this.setState(state => ({ stateDialog: !state.stateDialog }));
   }
 
   handleTitle(e) {
@@ -80,7 +86,7 @@ class Dashboard extends Component {
     this.fetchCards();
   }
 
-  handleCreateCard(e) {
+  handleCreateMemo(e) {
     const { stateTitle, stateDescription, stateCardColor } = this.state;
 
     fetch('/createcard', {
@@ -102,7 +108,7 @@ class Dashboard extends Component {
 
   render() {
     const {
-      expanded, cards, stateCardColor,
+      expanded, cards, stateCardColor, stateDialog,
     } = this.state;
     return (
       <div style={styles.root}>
@@ -125,10 +131,10 @@ class Dashboard extends Component {
           <div style={styles.list}>
             <Grid container justify="center">
               <Grid item>
-                <AddCard
+                <AddMemo
                   onChangeTitle={this.handleTitle}
                   onChangeDescription={this.handleDescription}
-                  onCreateCard={this.handleCreateCard}
+                  onCreateMemo={this.handleCreateMemo}
                   onChangeColor={this.handleColor}
                   stateCardColor={stateCardColor}
                 />
@@ -141,7 +147,9 @@ class Dashboard extends Component {
         </Drawer>
         <Board
           cards={cards}
+          stateDialog={stateDialog}
           onDelete={this.handleDelete}
+          onDialog={this.handleDialog}
         />
       </div>
     );

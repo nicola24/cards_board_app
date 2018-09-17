@@ -42,12 +42,12 @@ const styles = {
   },
 };
 
-const AddCard = ({
-  onCreateCard, onChangeTitle, onChangeDescription, onChangeColor, stateCardColor,
+const AddMemo = ({
+  onCreateMemo, onChangeTitle, onChangeDescription, onChangeColor, stateCardColor,
 }) => (
   <Card style={styles.card}>
     <CardContent>
-      <form onSubmit={onCreateCard}>
+      <form onSubmit={onCreateMemo}>
         <FormControl>
           <input
             onChange={onChangeTitle}
@@ -96,12 +96,12 @@ const AddCard = ({
   </Card>
 );
 
-AddCard.propTypes = {
-  onCreateCard: PropTypes.func.isRequired,
+AddMemo.propTypes = {
+  onCreateMemo: PropTypes.func.isRequired,
   onChangeTitle: PropTypes.func.isRequired,
   onChangeDescription: PropTypes.func.isRequired,
   onChangeColor: PropTypes.func.isRequired,
   stateCardColor: PropTypes.string.isRequired,
 };
 
-export default AddCard;
+export default AddMemo;
