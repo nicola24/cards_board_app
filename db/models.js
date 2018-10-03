@@ -9,23 +9,23 @@ const MemoSchema = new mongoose.Schema({
   time: { type: Date, default: Date.now },
 });
 
-const Card = mongoose.model('Card', MemoSchema);
+const Memo = mongoose.model('Memo', MemoSchema);
 
 // find all memos
-const getMemos = () => Card.find();
+const getMemos = () => Memo.find();
 
 // create one meme
-const createMemo = card => Card.create(card);
+const createMemo = card => Memo.create(card);
 
 // delete one memo
-const deleteMemo = (id, cb) => Card.findByIdAndDelete(id, cb);
+const deleteMemo = (id, cb) => Memo.findByIdAndDelete(id, cb);
 
 // update one memo
 const updateMemo = (id, {
   title: updateTitle,
   description: updateDescription,
   color: updateColor,
-}, cb) => Card.findByIdAndUpdate(id, {
+}, cb) => Memo.findByIdAndUpdate(id, {
   title: updateTitle,
   description: updateDescription,
   color: updateColor,

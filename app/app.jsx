@@ -1,8 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Dashboard from './components/Dashboard';
+import Dashboard from './containers/Dashboard';
 
-render(<Dashboard />, document.getElementById('app'));
+const MOUNT_NODE = document.getElementById('app');
+
+render(
+  <Provider>
+    <Dashboard />
+  </Provider>,
+  MOUNT_NODE,
+);
