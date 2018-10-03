@@ -10,15 +10,7 @@ $ npm install
 $ npm start
 ```
 
- - Once the server is running, you can visit `http://localhost:3000/`
-
-Or in development mode:
-```
-$ npm run dev
-$ nodemon server/server.js
-```
-
- - Once the server is running, you can visit `http://localhost:3000/`
+ - Once the server is running, you can visit `http://localhost:8080/`
 
 ## Composition
 - Node/ Express
@@ -27,4 +19,4 @@ $ nodemon server/server.js
 - Material-UI/ Bootstrap
 - Webpack & Babel
 
-![diagram](https://i.imgur.com/rjZUy4g.png)
+![diagram](https://i.imgur.com/h3y8sBz.png)

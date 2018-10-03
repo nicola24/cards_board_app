@@ -3,19 +3,11 @@ import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 
-import SingleMemo from './SingleMemo';
+import styles from './styles';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-    paddingTop: 24,
-    paddingLeft: 24,
-  },
-};
+import SingleMemo from '../SingleMemo';
 
-const Board = ({
-  memos, onDelete, stateDialog, onDialog,
-}) => (
+const Board = ({ memos, onDelete }) => (
   <div style={styles.root}>
     <Grid
       container
@@ -27,10 +19,8 @@ const Board = ({
       {memos.map(x => (
         <SingleMemo
           key={x._id}
-          card={x}
+          memo={x}
           onDelete={onDelete}
-          stateDialog={stateDialog}
-          onDialog={onDialog}
         />
       ))}
     </Grid>
@@ -40,8 +30,6 @@ const Board = ({
 Board.propTypes = {
   memos: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDelete: PropTypes.func.isRequired,
-  stateDialog: PropTypes.bool.isRequired,
-  onDialog: PropTypes.func.isRequired,
 };
 
 export default Board;

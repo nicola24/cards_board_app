@@ -8,22 +8,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 
-import Footer from './Footer';
-import Board from './Board';
-import AddMemo from './AddMemo';
+import styles from './styles';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  list: {
-    width: 400,
-  },
-};
+import Footer from '../Footer';
+import Board from '../Board';
+import AddMemo from '../AddMemo';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -34,15 +23,11 @@ class Dashboard extends Component {
       stateTitle: '',
       stateDescription: '',
       stateMemoColor: 'yellow',
-      stateDialog: false,
     };
-    this.toggle = this.toggle.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
+    this.toggleLeft = this.toggleLeft.bind(this);
+    this.handleForm = this.handleForm.bind(this);
     this.handleCreateMemo = this.handleCreateMemo.bind(this);
-    this.handleColor = this.handleColor.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleDialog = this.handleDialog.bind(this);
   }
 
   componentDidMount() {
@@ -50,33 +35,21 @@ class Dashboard extends Component {
   }
 
   fetchMemos() {
-    fetch('/getmemos')
+    fetch('api/getmemos')
       .then(res => res.json())
       .then(data => this.setState({ memos: data }));
   }
 
-  toggle() {
+  toggleLeft() {
     this.setState(state => ({ expanded: !state.expanded }));
   }
 
-  handleDialog() {
-    this.setState(state => ({ stateDialog: !state.stateDialog }));
-  }
-
-  handleTitle(e) {
-    this.setState({ stateTitle: e.target.value });
-  }
-
-  handleDescription(e) {
-    this.setState({ stateDescription: e.target.value });
-  }
-
-  handleColor(e) {
-    this.setState({ stateMemoColor: e.target.value });
+  handleForm(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleDelete(id) {
-    fetch('/deletememo', {
+    fetch('api/deletememo', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +62,7 @@ class Dashboard extends Component {
   handleCreateMemo(e) {
     const { stateTitle, stateDescription, stateMemoColor } = this.state;
 
-    fetch('/creatememo', {
+    fetch('api/creatememo', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -108,7 +81,7 @@ class Dashboard extends Component {
 
   render() {
     const {
-      expanded, memos, stateMemoColor, stateDialog,
+      expanded, memos, stateMemoColor,
     } = this.state;
     return (
       <div style={styles.root}>
@@ -118,7 +91,7 @@ class Dashboard extends Component {
               style={styles.menuButton}
               color="inherit"
               aria-label="Menu"
-              onClick={() => this.toggle()}
+              onClick={() => this.toggleLeft()}
             >
               <EditIcon />
             </IconButton>
@@ -127,15 +100,13 @@ class Dashboard extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer anchor="left" open={expanded} onClose={() => this.toggle()}>
+        <Drawer anchor="left" open={expanded} onClose={() => this.toggleLeft()}>
           <div style={styles.list}>
             <Grid container justify="center">
               <Grid item>
                 <AddMemo
-                  onChangeTitle={this.handleTitle}
-                  onChangeDescription={this.handleDescription}
+                  onChangeForm={this.handleForm}
                   onCreateMemo={this.handleCreateMemo}
-                  onChangeColor={this.handleColor}
                   stateMemoColor={stateMemoColor}
                 />
               </Grid>
@@ -147,9 +118,7 @@ class Dashboard extends Component {
         </Drawer>
         <Board
           memos={memos}
-          stateDialog={stateDialog}
           onDelete={this.handleDelete}
-          onDialog={this.handleDialog}
         />
       </div>
     );
