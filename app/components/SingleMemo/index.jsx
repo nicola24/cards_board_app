@@ -20,13 +20,13 @@ const SingleMemo = ({ memo, onDelete }) => (
         <DeleteIcon />
       </IconButton>
       <CardContent>
-        <Typography variant="headline" component="h2">
+        <Typography variant="headline" component="h2" style={styles.word}>
           {memo.title}
         </Typography>
-        <Typography component="p">
+        <Typography component="p" style={styles.word}>
           {memo.description}
         </Typography>
-        <Typography color="textSecondary">
+        <Typography color="textSecondary" style={styles.time}>
           {`created ${moment.utc(memo.time).startOf('min').fromNow()}`}
         </Typography>
       </CardContent>

@@ -16,7 +16,6 @@ const AddMemo = ({ onCreateMemo, onChangeForm, stateMemoColor }) => (
         <FormControl>
           <input
             onChange={onChangeForm}
-            maxLength="15"
             className="form-control"
             placeholder="Enter Title"
             name="stateTitle"

@@ -8,6 +8,7 @@ const cardStyle = (color) => {
   const style = {
     width: 250,
     height: 250,
+    overflowY: 'auto',
   };
 
   switch (color) {
