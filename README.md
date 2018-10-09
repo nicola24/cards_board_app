@@ -19,4 +19,6 @@ $ npm start
 - Material-UI/ Bootstrap
 - Webpack & Babel
 
-![diagram](https://i.imgur.com/h3y8sBz.png)
+
+![todo_gif](https://i.imgur.com/yEOCBF2.gif)
+![diagram](https://i.imgur.com/ie61G0x.png)

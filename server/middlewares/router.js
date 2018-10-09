@@ -31,7 +31,7 @@ router.route('/deletememo').delete((req, res, next) => {
 });
 
 // POST => update an existing memo
-router.route('/updatememo').post((req, res, next) => {
+router.route('/updatememo').put((req, res, next) => {
   db.updateMemo(req.body.id, req.body.update, (err) => {
     if (err) next(err);
     res.send();
