@@ -3,17 +3,11 @@ import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 
-import SingleCard from './SingleCard';
+import styles from './styles';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-    paddingTop: 24,
-    paddingLeft: 24,
-  },
-};
+import SingleMemo from '../SingleMemo';
 
-const Board = ({ cards, onDelete }) => (
+const Board = ({ memos, onDelete }) => (
   <div style={styles.root}>
     <Grid
       container
@@ -22,13 +16,19 @@ const Board = ({ cards, onDelete }) => (
       alignItems="center"
       spacing={24}
     >
-      {cards.map(x => <SingleCard key={x._id} card={x} onDelete={onDelete} />)}
+      {memos.map(x => (
+        <SingleMemo
+          key={x._id}
+          memo={x}
+          onDelete={onDelete}
+        />
+      ))}
     </Grid>
   </div>
 );
 
 Board.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  memos: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

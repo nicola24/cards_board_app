@@ -8,82 +8,61 @@ import EditIcon from '@material-ui/icons/Edit';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 
-import Footer from './Footer';
-import Board from './Board';
-import AddCard from './AddCard';
+import styles from './styles';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  list: {
-    width: 400,
-  },
-};
+import Footer from '../../components/Footer';
+import Board from '../../components/Board';
+import AddMemo from '../../components/AddMemo';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
-      cards: [],
+      memos: [],
       stateTitle: '',
       stateDescription: '',
-      stateCardColor: 'yellow',
+      stateMemoColor: 'yellow',
     };
-    this.toggle = this.toggle.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
-    this.handleCreateCard = this.handleCreateCard.bind(this);
-    this.handleColor = this.handleColor.bind(this);
+    this.toggleLeft = this.toggleLeft.bind(this);
+    this.handleForm = this.handleForm.bind(this);
+    this.handleCreateMemo = this.handleCreateMemo.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    this.fetchCards();
+    this.fetchMemos();
   }
 
-  fetchCards() {
-    fetch('/getcards')
+  fetchMemos() {
+    fetch('api/getmemos')
       .then(res => res.json())
-      .then(data => this.setState({ cards: data }));
+      .then(data => this.setState({ memos: data }));
   }
 
-  toggle() {
+  toggleLeft() {
     this.setState(state => ({ expanded: !state.expanded }));
   }
 
-  handleTitle(e) {
-    this.setState({ stateTitle: e.target.value });
-  }
-
-  handleDescription(e) {
-    this.setState({ stateDescription: e.target.value });
-  }
-
-  handleColor(e) {
-    this.setState({ stateCardColor: e.target.value });
+  handleForm(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleDelete(id) {
-    fetch('/deletecard', {
+    fetch('api/deletememo', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
     });
-    this.fetchCards();
+    this.fetchMemos();
   }
 
-  handleCreateCard(e) {
-    const { stateTitle, stateDescription, stateCardColor } = this.state;
+  handleCreateMemo(e) {
+    const { stateTitle, stateDescription, stateMemoColor } = this.state;
 
-    fetch('/createcard', {
+    fetch('api/creatememo', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -91,18 +70,18 @@ class Dashboard extends Component {
       body: JSON.stringify({
         title: stateTitle,
         description: stateDescription,
-        color: stateCardColor,
+        color: stateMemoColor,
       }),
     });
 
     this.setState({ expanded: false });
-    this.fetchCards();
+    this.fetchMemos();
     e.preventDefault();
   }
 
   render() {
     const {
-      expanded, cards, stateCardColor,
+      expanded, memos, stateMemoColor,
     } = this.state;
     return (
       <div style={styles.root}>
@@ -112,7 +91,7 @@ class Dashboard extends Component {
               style={styles.menuButton}
               color="inherit"
               aria-label="Menu"
-              onClick={() => this.toggle()}
+              onClick={() => this.toggleLeft()}
             >
               <EditIcon />
             </IconButton>
@@ -121,16 +100,14 @@ class Dashboard extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer anchor="left" open={expanded} onClose={() => this.toggle()}>
+        <Drawer anchor="left" open={expanded} onClose={() => this.toggleLeft()}>
           <div style={styles.list}>
             <Grid container justify="center">
               <Grid item>
-                <AddCard
-                  onChangeTitle={this.handleTitle}
-                  onChangeDescription={this.handleDescription}
-                  onCreateCard={this.handleCreateCard}
-                  onChangeColor={this.handleColor}
-                  stateCardColor={stateCardColor}
+                <AddMemo
+                  onChangeForm={this.handleForm}
+                  onCreateMemo={this.handleCreateMemo}
+                  stateMemoColor={stateMemoColor}
                 />
               </Grid>
               <Grid item>
@@ -140,7 +117,7 @@ class Dashboard extends Component {
           </div>
         </Drawer>
         <Board
-          cards={cards}
+          memos={memos}
           onDelete={this.handleDelete}
         />
       </div>

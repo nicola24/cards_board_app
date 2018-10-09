@@ -2,38 +2,38 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/board', { useNewUrlParser: true });
 
-const CardSchema = new mongoose.Schema({
+const MemoSchema = new mongoose.Schema({
   title: String,
   description: { type: String, required: true },
   color: { type: String, enum: ['green', 'yellow', 'blue', 'orange', 'pink'], required: true },
   time: { type: Date, default: Date.now },
 });
 
-const Card = mongoose.model('Card', CardSchema);
+const Memo = mongoose.model('Memo', MemoSchema);
 
-// find all cards
-const getCards = () => Card.find();
+// find all memos
+const getMemos = () => Memo.find();
 
-// create one card
-const createCard = card => Card.create(card);
+// create one meme
+const createMemo = card => Memo.create(card);
 
-// delete one card
-const deleteCard = (id, cb) => Card.findByIdAndDelete(id, cb);
+// delete one memo
+const deleteMemo = (id, cb) => Memo.findByIdAndDelete(id, cb);
 
-// update one card
-const updateCard = (id, {
+// update one memo
+const updateMemo = (id, {
   title: updateTitle,
   description: updateDescription,
   color: updateColor,
-}, cb) => Card.findByIdAndUpdate(id, {
+}, cb) => Memo.findByIdAndUpdate(id, {
   title: updateTitle,
   description: updateDescription,
   color: updateColor,
 }, cb);
 
 module.exports = {
-  getCards,
-  createCard,
-  deleteCard,
-  updateCard,
+  getMemos,
+  createMemo,
+  deleteMemo,
+  updateMemo,
 };
