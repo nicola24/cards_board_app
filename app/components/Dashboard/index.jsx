@@ -10,9 +10,9 @@ import Grid from '@material-ui/core/Grid';
 
 import styles from './styles';
 
-import Footer from '../../components/Footer';
-import Board from '../../components/Board';
-import AddMemo from '../../components/AddMemo';
+import Footer from '../Footer';
+import Board from '../Board';
+import AddMemo from '../AddMemo';
 
 class Dashboard extends Component {
   constructor(props) {
